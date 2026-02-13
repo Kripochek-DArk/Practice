@@ -14,5 +14,5 @@
 - сохранение результата суммы этих чисел, результат суммы выводится в результат
 
 ### Тестирование
+![aesthetic-mountain-n76a58wqhakbjjeo](https://github.com/user-attachments/assets/24ad237c-bccf-4a4a-945d-5d6777c612af)
 
-Скриншоты результата работы программы 
