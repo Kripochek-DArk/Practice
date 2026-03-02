@@ -80,7 +80,9 @@
 - вывод списка десятичных числа
 ### Тестирование
 
-Скриншоты результата работы программы 
+<img width="513" height="266" alt="image" src="https://github.com/user-attachments/assets/0b829303-1a5f-4f9c-bf14-bd3b2c14f86d" />
+<img width="477" height="322" alt="image" src="https://github.com/user-attachments/assets/a538add3-6b80-4727-bac5-9d555706b080" />
+
 
 ## Задача 2
 
@@ -95,4 +97,5 @@
 - вывод нового числа
 ### Тестирование
 
-Скриншоты результата работы программы 
+<img width="452" height="264" alt="image" src="https://github.com/user-attachments/assets/446d7aeb-21d7-4930-9dbd-338f8c692a68" />
+<img width="493" height="331" alt="image" src="https://github.com/user-attachments/assets/92202f0e-af2d-42dc-87fe-585cdc55583c" />
