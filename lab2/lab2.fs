@@ -1,4 +1,3 @@
-    printfn "Чтобы закончить ввод продолжите ничего не вводя"
 open System
 
 let tryParseInt (input:string)  = 
