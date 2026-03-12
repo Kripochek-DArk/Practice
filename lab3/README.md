@@ -1,5 +1,7 @@
 # Лабораторная №3
 
+## Задача 1
+
 ### Текст задачи
 
 На основе последовательности, содержащей римские обозначения цифр от I до IX, получить их десятичные представления.  
@@ -17,7 +19,9 @@
 - полученные десятичные числа выводятся на экран с помощью Seq.iter
 ### Тестирование
 
-Пример работы программы:
+<img width="413" height="316" alt="image" src="https://github.com/user-attachments/assets/f7ac31d5-f61e-49b7-aa62-e2b7f12b0a97" />
+<img width="436" height="330" alt="image" src="https://github.com/user-attachments/assets/a547ff28-3518-4cef-a70c-bf40ad4607e6" />
+
 
 ## Задача 2
 
@@ -44,3 +48,5 @@
 - после обработки всей последовательности выводится полученное число
 
 ### Тестирование
+<img width="492" height="261" alt="image" src="https://github.com/user-attachments/assets/95b99f3d-dbfe-42cd-8578-5058b8aaf6ee" />
+<img width="504" height="354" alt="image" src="https://github.com/user-attachments/assets/cf60f319-37e4-4f92-9cd0-26ad5206795e" />
