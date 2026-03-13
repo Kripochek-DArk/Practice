@@ -51,12 +51,12 @@
 <img width="492" height="261" alt="image" src="https://github.com/user-attachments/assets/95b99f3d-dbfe-42cd-8578-5058b8aaf6ee" />
 <img width="504" height="354" alt="image" src="https://github.com/user-attachments/assets/cf60f319-37e4-4f92-9cd0-26ad5206795e" />
 
-##Задача 3
-Текст задачи
+## Задача 3
+### Текст задачи
 
 Указать, файлы с каким расширением встречаются в указанном каталоге и его подкаталогах реже всего.
 
-Алгоритм решения
+### Алгоритм решения
 
 - создается функция getExtensions, которая получает все файлы из указанного каталога и его подкаталогов
 для получения файлов используется Directory.EnumerateFiles с параметром SearchOption.AllDirectories
@@ -74,7 +74,7 @@
 - если каталог существует, вызывается функция findRarestExtensions
 - если каталог не существует, выводится сообщение об ошибке
 
-Тестирование
+### Тестирование
 <img width="545" height="222" alt="image" src="https://github.com/user-attachments/assets/500aee0b-dff8-4f8b-8b48-b8d5cac1bf49" />
 <img width="794" height="438" alt="image" src="https://github.com/user-attachments/assets/f9d79dcf-b551-4d5b-b9b9-24fd88613dcf" />
 <img width="520" height="93" alt="image" src="https://github.com/user-attachments/assets/55caa7c5-6ad0-4007-ad0f-536a45737e16" />
