@@ -19,7 +19,7 @@ let readStrings () =
         printf "Введите строку: "
         let input = Console.ReadLine()
 
-        if String.IsNullOrWhiteSpace input then
+        if input = "" then
             List.rev acc
         else
             loop (input :: acc)
