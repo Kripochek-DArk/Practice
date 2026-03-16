@@ -23,6 +23,8 @@
 - Вывести исходное и преобразованное дерево.
 
 ### Тестирование
+<img width="407" height="455" alt="image" src="https://github.com/user-attachments/assets/ad8b2964-bb53-495f-bc84-0de4b9246080" />
+<img width="412" height="267" alt="image" src="https://github.com/user-attachments/assets/36ae0175-3a58-4571-abee-abcd247f0fa5" />
 
 
 ## Задача 2
@@ -45,4 +47,6 @@
 
 ### Тестирование
 
+<img width="460" height="482" alt="image" src="https://github.com/user-attachments/assets/cb8595fc-c385-4396-8b09-0448e9865994" />
+<img width="482" height="359" alt="image" src="https://github.com/user-attachments/assets/ce8f8101-08af-41a5-88c5-cc255dad3565" />
 
