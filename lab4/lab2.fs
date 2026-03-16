@@ -1,0 +1,76 @@
+open System
+
+type Tree =
+    | Empty
+    | Node of string * Tree * Tree
+
+let rec buildTree (arr: string[]) index =
+    if index >= arr.Length then
+        Empty
+    else
+        Node(
+            arr.[index],
+            buildTree arr (2 * index + 1),
+            buildTree arr (2 * index + 2)
+        )
+
+let readStrings () =
+    let rec loop acc =
+        printf "Введите строку: "
+        let input = Console.ReadLine()
+
+        if String.IsNullOrWhiteSpace input then
+            List.rev acc
+        else
+            loop (input :: acc)
+
+    loop [] |> List.toArray
+
+let rec foldTree folder state tree =
+    match tree with
+    | Empty -> state
+    | Node(value, left, right) ->
+        let leftState = foldTree folder state left
+        let currentState = folder leftState value
+        foldTree folder currentState right
+
+let countStringsEndingWith symbol tree =
+    foldTree
+        (fun count value ->
+            if not (String.IsNullOrEmpty value) && value.[value.Length - 1] = symbol then
+                count + 1
+            else
+                count)
+        0
+        tree
+
+let rec printTree indent tree =
+    match tree with
+    | Empty -> ()
+    | Node(value, left, right) ->
+        printTree (indent + "   ") right
+        printfn "%s%s" indent value
+        printTree (indent + "   ") left
+
+[<EntryPoint>]
+let main args =
+    printfn "Введите строки (пустая строка — конец ввода):"
+    let values = readStrings ()
+
+    let tree = buildTree values 0
+
+    printfn "Исходное дерево:"
+    printTree "" tree
+    printfn ""
+
+    printf "Введите символ: "
+    let inputChar = Console.ReadLine()
+
+    if String.IsNullOrWhiteSpace inputChar || inputChar.Length <> 1 then
+        printfn "Ошибка: нужно ввести ровно один символ"
+    else
+        let symbol = inputChar.[0]
+        let result = countStringsEndingWith symbol tree
+        printfn "Количество узлов, оканчивающихся на символ '%c': %d" symbol result
+
+    0
