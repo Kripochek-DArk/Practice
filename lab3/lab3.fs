@@ -19,11 +19,15 @@ let findRarestExtensions dir =
         printfn "В каталоге '%s' нет файлов с расширениями" dir
     else
         let minCount = extCounts |> Seq.minBy snd |> snd
-        let rarest = extCounts |> Seq.filter (fun (_, count) -> count = minCount)
+        let rarest = 
+            extCounts 
+            |> Seq.filter (fun (_, count) -> count = minCount)
         
         printfn "В каталоге '%s' и его подкаталогах:" dir
-        printfn "Расширения, которые встречаются реже всего (по %d раз):" minCount
-        rarest |> Seq.iter (fun (ext, count) -> printfn "  %s" ext)
+        printf "Расширения, которые встречаются реже всего "
+        printfn "(по %d раз):" minCount
+        rarest |> Seq.iter (
+            fun (ext, count) -> printfn "  %s" ext)
 
 [<EntryPoint>]
 let main argv = 
