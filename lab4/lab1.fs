@@ -4,15 +4,18 @@ type Tree =
     | Empty
     | Node of int * Tree * Tree
 
-let rec buildTree (arr: int[]) index =
-    if index >= arr.Length then
-        Empty
-    else
-        Node(
-            arr.[index],
-            buildTree arr (2 * index + 1),
-            buildTree arr (2 * index + 2)
-        )
+let rec insert value tree =
+    match tree with
+    | Empty ->
+        Node(value, Empty, Empty)
+    | Node(current, left, right) ->
+        if value < current then
+            Node(current, insert value left, right)
+        else
+            Node(current, left, insert value right)
+
+let buildTree (arr: int[]) =
+    Array.fold (fun tree value -> insert value tree) Empty arr
 
 let readNumbers () =
     let rec loop acc =
@@ -25,24 +28,23 @@ let readNumbers () =
             match Int32.TryParse input with
             | true, value when value >= 0 ->
                 loop (value :: acc)
-
-            | true, value when value < 0 ->
-                printfn "отрицательные числа запрещены"
+            | true, _ ->
+                printfn "Отрицательные числа запрещены"
                 loop acc
-
             | false, _ ->
-                printfn "введено не число"
+                printfn "Введено не число"
                 loop acc
 
     loop [] |> List.toArray
-let rec mapTree changeFunction tree =
+
+let rec mapTree transform tree =
     match tree with
     | Empty -> Empty
     | Node(value, left, right) ->
         Node(
-            changeFunction value,
-            mapTree changeFunction left,
-            mapTree changeFunction right
+            transform value,
+            mapTree transform left,
+            mapTree transform right
         )
 
 let transformNumber number =
@@ -66,7 +68,7 @@ let rec printTree indent tree =
     | Empty -> ()
     | Node(value, left, right) ->
         printTree (indent + "   ") right
-        printfn "%s%A" indent value
+        printfn "%s%d" indent value
         printTree (indent + "   ") left
 
 [<EntryPoint>]
@@ -74,8 +76,7 @@ let main args =
     printfn "Введите числа (пустая строка — конец ввода)"
 
     let values = readNumbers ()
-
-    let tree = buildTree values 0
+    let tree = buildTree values
 
     printfn "Исходное дерево:"
     printTree "" tree

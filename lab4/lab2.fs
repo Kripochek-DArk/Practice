@@ -4,15 +4,18 @@ type Tree =
     | Empty
     | Node of string * Tree * Tree
 
-let rec buildTree (arr: string[]) index =
-    if index >= arr.Length then
-        Empty
-    else
-        Node(
-            arr.[index],
-            buildTree arr (2 * index + 1),
-            buildTree arr (2 * index + 2)
-        )
+let rec insert value tree =
+    match tree with
+    | Empty ->
+        Node(value, Empty, Empty)
+    | Node(current, left, right) ->
+        if value < current then
+            Node(current, insert value left, right)
+        else
+            Node(current, left, insert value right)
+
+let buildTree (arr: int[]) =
+    Array.fold (fun tree value -> insert value tree) Empty arr
 
 let readStrings () =
     let rec loop acc =
