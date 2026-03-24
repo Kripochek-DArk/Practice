@@ -8,9 +8,8 @@
 
 ### Алгоритм решения
 
-- Считать числа с клавиатуры до ввода пустой строки.
-- Проверить корректность введённых данных (число и не отрицательное).
-- Сохранить введённые числа в массив.
+- Считать количество чисел
+- Сгенерировать числа в массив.
 - Построить бинарное дерево из массива:
     - левый потомок: 2*i + 1
     - правый потомок: 2*i + 2
@@ -23,8 +22,8 @@
 - Вывести исходное и преобразованное дерево.
 
 ### Тестирование
-<img width="407" height="455" alt="image" src="https://github.com/user-attachments/assets/ad8b2964-bb53-495f-bc84-0de4b9246080" />
-<img width="412" height="267" alt="image" src="https://github.com/user-attachments/assets/36ae0175-3a58-4571-abee-abcd247f0fa5" />
+<img width="347" height="546" alt="image" src="https://github.com/user-attachments/assets/fe37fcd5-6f35-43c8-acbd-64a3bad41241" />
+<img width="311" height="315" alt="image" src="https://github.com/user-attachments/assets/6aff90b5-1c3d-4037-92bd-48422e600ecb" />
 
 
 ## Задача 2
@@ -35,8 +34,8 @@
 
 ### Алгоритм решения
 
-- Считать строки с клавиатуры до ввода пустой строки.
-- Сохранить введённые строки в массив.
+- Считать количество элементов
+- Сгенерировать и сохранить строки в массив.
 - Построить бинарное дерево из массива:
     - левый потомок: 2*i + 1
     - правый потомок: 2*i + 2
@@ -47,6 +46,7 @@
 
 ### Тестирование
 
-<img width="460" height="482" alt="image" src="https://github.com/user-attachments/assets/cb8595fc-c385-4396-8b09-0448e9865994" />
-<img width="482" height="359" alt="image" src="https://github.com/user-attachments/assets/ce8f8101-08af-41a5-88c5-cc255dad3565" />
+<img width="849" height="261" alt="image" src="https://github.com/user-attachments/assets/899d3c2d-b0a6-428e-b29d-b741cd83a06f" />
+<img width="914" height="397" alt="image" src="https://github.com/user-attachments/assets/3a88f778-3836-4e4b-b82a-e0995d486412" />
+
 
