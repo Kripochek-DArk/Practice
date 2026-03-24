@@ -17,25 +17,18 @@ let rec insert value tree =
 let buildTree (arr: int[]) =
     Array.fold (fun tree value -> insert value tree) Empty arr
 
-let readNumbers () =
-    let rec loop acc =
-        printf "Введите число: "
-        let input = Console.ReadLine()
+let rec readNumbers () =
+    printf "Введите количество элементов: "
+    let input = Console.ReadLine()
 
-        if String.IsNullOrWhiteSpace input then
-            List.rev acc
-        else
-            match Int32.TryParse input with
-            | true, value when value >= 0 ->
-                loop (value :: acc)
-            | true, _ ->
-                printfn "Отрицательные числа запрещены"
-                loop acc
-            | false, _ ->
-                printfn "Введено не число"
-                loop acc
+    match Int32.TryParse input with
+    | true, value when value > 0 ->
+        let rnd = Random()
+        Array.init value (fun _ -> rnd.Next(1, 100))
 
-    loop [] |> List.toArray
+    | _ , _ ->
+        printfn "Некорректный ввод, попробуйте снова"
+        readNumbers ()
 
 let rec mapTree transform tree =
     match tree with
@@ -73,7 +66,6 @@ let rec printTree indent tree =
 
 [<EntryPoint>]
 let main args =
-    printfn "Введите числа (пустая строка — конец ввода)"
 
     let values = readNumbers ()
     let tree = buildTree values

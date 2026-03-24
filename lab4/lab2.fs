@@ -14,20 +14,30 @@ let rec insert value tree =
         else
             Node(current, left, insert value right)
 
-let buildTree (arr: int[]) =
+let buildTree (arr: string[]) =
     Array.fold (fun tree value -> insert value tree) Empty arr
 
-let readStrings () =
-    let rec loop acc =
-        printf "Введите строку: "
-        let input = Console.ReadLine()
+let rec readStrings () =
+    printf "Введите количество строк: "
+    let input = Console.ReadLine()
 
-        if input = "" then
-            List.rev acc
-        else
-            loop (input :: acc)
+    match Int32.TryParse input with
+    | true, count when count > 0 ->
+        let rnd = Random()
+        let chars = "abcdefghijklmnopqrstuvwxyz"
 
-    loop [] |> List.toArray
+        let randomString () =
+            let length = rnd.Next(3, 10)
+            String(
+                Array.init length (fun _ ->
+                    chars.[rnd.Next(chars.Length)])
+            )
+
+        Array.init count (fun _ -> randomString())
+
+    | _ ->
+        printfn "Некорректный ввод, попробуйте снова"
+        readStrings ()
 
 let rec foldTree folder state tree =
     match tree with
@@ -57,10 +67,12 @@ let rec printTree indent tree =
 
 [<EntryPoint>]
 let main args =
-    printfn "Введите строки (пустая строка — конец ввода):"
+    printfn "Будут сгенерированы случайные строки"
     let values = readStrings ()
 
-    let tree = buildTree values 0
+    printfn "Сгенерированные строки: %A" values
+
+    let tree = buildTree values
 
     printfn "Исходное дерево:"
     printTree "" tree
