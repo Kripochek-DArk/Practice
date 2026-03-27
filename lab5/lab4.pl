@@ -1,4 +1,4 @@
-:- initialization(main).
+:- initialization(main, main).
 
 
 stronger(herbert, thomas).
