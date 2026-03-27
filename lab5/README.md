@@ -14,7 +14,8 @@
 - После этого вычисляется и выводиться сумма первой и последней цифры.
 
 ### Тестирование
-
+<img width="348" height="46" alt="image" src="https://github.com/user-attachments/assets/951c0123-f60e-4fa6-addc-d92618328b32" />
+<img width="287" height="49" alt="image" src="https://github.com/user-attachments/assets/c1c26f71-a934-4df8-9222-381a70a3ebca" />
 
 
 ## Задача 2
@@ -32,6 +33,8 @@
 - Если нечётные элементы отсутствуют, выводится соответствующее сообщение
 
 ### Тестирование
+<img width="352" height="68" alt="image" src="https://github.com/user-attachments/assets/d7488c74-9e8b-48bf-acae-0bda3c48f4e0" />
+<img width="338" height="69" alt="image" src="https://github.com/user-attachments/assets/d3b37dc1-3496-4ec9-a7be-832fba7a0bf6" />
 
 
 ## Задача 3
@@ -56,6 +59,8 @@ A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)
 - Если множества равны — закон выполняется, иначе — нет
 
 ### Тестирование
+<img width="317" height="131" alt="image" src="https://github.com/user-attachments/assets/8460fbd8-b38f-4a18-9b15-4fd98f132e5e" />
+<img width="250" height="137" alt="image" src="https://github.com/user-attachments/assets/2ed2c6e7-a5e3-439f-af9e-9d667248828a" />
 
 
 ## Задача 4
@@ -78,4 +83,5 @@ A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)
 - Если ни один порядок не подходит — делается вывод о противоречии в условиях
 
 ### Тестирование
+<img width="349" height="27" alt="image" src="https://github.com/user-attachments/assets/697f8bab-5b96-41bf-8943-9de5f05af95d" />
 
