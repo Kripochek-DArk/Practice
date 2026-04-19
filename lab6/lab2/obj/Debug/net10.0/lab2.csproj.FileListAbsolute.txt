@@ -1,0 +1,15 @@
+C:\code\C++\ЯП\practice\lab6\lab2\obj\Debug\net10.0\lab2.GeneratedMSBuildEditorConfig.editorconfig
+C:\code\C++\ЯП\practice\lab6\lab2\obj\Debug\net10.0\lab2.AssemblyInfoInputs.cache
+C:\code\C++\ЯП\practice\lab6\lab2\obj\Debug\net10.0\lab2.AssemblyInfo.cs
+C:\code\C++\ЯП\practice\lab6\lab2\obj\Debug\net10.0\lab2.csproj.CoreCompileInputs.cache
+C:\code\C++\ЯП\practice\lab6\lab2\obj\Debug\net10.0\lab2.sourcelink.json
+C:\code\C++\ЯП\practice\lab6\lab2\bin\Debug\net10.0\lab2.exe
+C:\code\C++\ЯП\practice\lab6\lab2\bin\Debug\net10.0\lab2.deps.json
+C:\code\C++\ЯП\practice\lab6\lab2\bin\Debug\net10.0\lab2.runtimeconfig.json
+C:\code\C++\ЯП\practice\lab6\lab2\bin\Debug\net10.0\lab2.dll
+C:\code\C++\ЯП\practice\lab6\lab2\bin\Debug\net10.0\lab2.pdb
+C:\code\C++\ЯП\practice\lab6\lab2\obj\Debug\net10.0\lab2.dll
+C:\code\C++\ЯП\practice\lab6\lab2\obj\Debug\net10.0\refint\lab2.dll
+C:\code\C++\ЯП\practice\lab6\lab2\obj\Debug\net10.0\lab2.pdb
+C:\code\C++\ЯП\practice\lab6\lab2\obj\Debug\net10.0\lab2.genruntimeconfig.cache
+C:\code\C++\ЯП\practice\lab6\lab2\obj\Debug\net10.0\ref\lab2.dll
