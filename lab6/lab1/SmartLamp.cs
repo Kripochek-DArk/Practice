@@ -1,45 +1,47 @@
 class SmartLamp : Device
 {
-    private int brightness;
-    private string name;
+    private int _brightness;
+    private string _name;
 
     public SmartLamp() : base()
     {
-        brightness = 0;
-        name = "Unnamed";
+        _brightness = 0;
+        _name = "Unnamed";
     }
 
-    public SmartLamp(bool isOn, bool isWorking, int brightness, string name) : base(isOn, isWorking)
+    public SmartLamp(bool isOn, bool isWorking,
+    int _brightness, string _name)
+     : base(isOn, isWorking)
     {
-        this.brightness = brightness;
-        this.name = name;
+        this._brightness = _brightness;
+        this._name = _name;
     }
 
     public SmartLamp(SmartLamp other) : base(other)
     {
-        brightness = other.brightness;
-        name = other.name;
+        _brightness = other._brightness;
+        _name = other._name;
     }
 
     public void TurnOn()
     {
-        System.Console.WriteLine($"{name} включена");
+        System.Console.WriteLine($"{_name} включена");
     }
 
     public void SetBrightness(int value)
     {
         if (value >= 0 && value <= 100)
         {
-            brightness = value;
+            _brightness = value;
         }
     }
 
     public string GetInfo()
     {
-        return $"{name}, brightness = {brightness}";     
+        return $"{_name}, _brightness = {_brightness}";     
     }
     public override string ToString()
     {
-        return base.ToString() + $", brightenss = {brightness}, name = {name}";
+        return base.ToString() + $", brightenss = {_brightness}, _name = {_name}";
     }
 }

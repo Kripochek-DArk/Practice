@@ -1,35 +1,35 @@
 class Device
 {
-    private bool isOn;
-    private bool isWorking;
+    private bool _isOn;
+    private bool _isWorking;
 
     public Device()
     {
-        isOn = false;
-        isWorking = false;
+        _isOn = false;
+        _isWorking = false;
     }
 
-    public Device(bool isOn, bool isWorking)
+    public Device(bool _isOn, bool _isWorking)
     {
-        this.isOn = isOn;
-        this.isWorking = isWorking;
+        this._isOn = _isOn;
+        this._isWorking = _isWorking;
     }
 
     public Device(Device other)
     {
-        isOn = other.isOn;
-        isWorking = other.isWorking;
+        _isOn = other._isOn;
+        _isWorking = other._isWorking;
     }
 
 
     public bool IsEquivalent()
     {
-        return isOn == isWorking;
+        return _isOn == _isWorking;
     }
 
     public override string ToString()
     {
-        return $"isOn = {isOn}, isWorking = {isWorking}";
+        return $"_isOn = {_isOn}, _isWorking = {_isWorking}";
     }
     
 }

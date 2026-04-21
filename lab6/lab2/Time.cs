@@ -1,19 +1,19 @@
 class Time
 {
-    private byte hours;
-    private byte minutes;
+    private byte _hours;
+    private byte _minutes;
 
     public byte Hours
     {
         get
         {
-            return hours;
+            return _hours;
         }
         set
         {
             if (value <= 23)
             {
-                hours = value;
+                _hours = value;
             }
             else
             {
@@ -26,13 +26,13 @@ class Time
     {
         get
         {
-            return minutes;
+            return _minutes;
         }
         set
         {
             if (value <= 59)
             {
-                minutes = value;
+                _minutes = value;
             }
             else
             {
@@ -43,14 +43,14 @@ class Time
 
     public Time()
     {
-        hours = 0;
-        minutes = 0;
+        _hours = 0;
+        _minutes = 0;
     }
 
-    public Time(byte hours, byte minutes)
+    public Time(byte _hours, byte _minutes)
     {
-        Hours = hours;
-        Minutes = minutes;
+        Hours = _hours;
+        Minutes = _minutes;
     }
 
     public Time(Time other)
@@ -60,8 +60,8 @@ class Time
             throw new ArgumentException("Ошибка времени.");
         }
 
-        hours = other.hours;
-        minutes = other.minutes;
+        _hours = other._hours;
+        _minutes = other._minutes;
     }
 
     public Time Subtract(Time other)
@@ -85,12 +85,12 @@ class Time
 
     public override string ToString()
     {
-        return hours.ToString("D2") + ":" + minutes.ToString("D2");
+        return _hours.ToString("D2") + ":" + _minutes.ToString("D2");
     }
 
     public static Time operator --(Time time)
     {
-        int totalMinutes = time.hours * 60 + time.minutes;
+        int totalMinutes = time._hours * 60 + time._minutes;
         totalMinutes--;
 
         if (totalMinutes < 0)
@@ -106,17 +106,17 @@ class Time
 
     public static explicit operator byte(Time time)
     {
-        return time.hours;
+        return time._hours;
     }
 
     public static implicit operator bool(Time time)
     {
-        return time.hours != 0 || time.minutes != 0;
+        return time._hours != 0 || time._minutes != 0;
     }
 
     public static Time operator +(Time time, uint value)
     {
-        int totalMinutes = time.hours * 60 + time.minutes;
+        int totalMinutes = time._hours * 60 + time._minutes;
         totalMinutes += (int)value;
         totalMinutes %= 24 * 60;
 
@@ -133,8 +133,8 @@ class Time
 
     public static Time operator +(Time first, Time second)
     {
-        int firstTotalMinutes = first.hours * 60 + first.minutes;
-        int secondTotalMinutes = second.hours * 60 + second.minutes;
+        int firstTotalMinutes = first._hours * 60 + first._minutes;
+        int secondTotalMinutes = second._hours * 60 + second._minutes;
         int resultTotalMinutes = firstTotalMinutes + secondTotalMinutes;
 
         resultTotalMinutes %= 24 * 60;
@@ -147,7 +147,7 @@ class Time
 
     private int ToTotalMinutes()
     {
-        return hours * 60 + minutes;
+        return _hours * 60 + _minutes;
     }
 
     private static Time FromTotalMinutes(int totalMinutes)

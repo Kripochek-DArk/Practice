@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\code\\C++\\ЯП\\practice\\lab6\\lab1\\lab1.csproj": {}
+    "C:\\code\\C++\\ЯП\\Practice\\lab6\\lab1\\lab1.csproj": {}
   },
   "projects": {
-    "C:\\code\\C++\\ЯП\\practice\\lab6\\lab1\\lab1.csproj": {
+    "C:\\code\\C++\\ЯП\\Practice\\lab6\\lab1\\lab1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\code\\C++\\ЯП\\practice\\lab6\\lab1\\lab1.csproj",
+        "projectUniqueName": "C:\\code\\C++\\ЯП\\Practice\\lab6\\lab1\\lab1.csproj",
         "projectName": "lab1",
-        "projectPath": "C:\\code\\C++\\ЯП\\practice\\lab6\\lab1\\lab1.csproj",
+        "projectPath": "C:\\code\\C++\\ЯП\\Practice\\lab6\\lab1\\lab1.csproj",
         "packagesPath": "C:\\Users\\krip0\\.nuget\\packages\\",
-        "outputPath": "C:\\code\\C++\\ЯП\\practice\\lab6\\lab1\\obj\\",
+        "outputPath": "C:\\code\\C++\\ЯП\\Practice\\lab6\\lab1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\krip0\\AppData\\Roaming\\NuGet\\NuGet.Config"
