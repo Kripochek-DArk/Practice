@@ -115,3 +115,17 @@
 
 
 ## Тестирование
+<img width="430" height="666" alt="image" src="https://github.com/user-attachments/assets/4f49c066-b6ab-40bc-9d45-4f51289a06c6" />
+<img width="439" height="495" alt="image" src="https://github.com/user-attachments/assets/c48ea0f5-8378-40ef-b439-012298c0d9f3" />
+<img width="436" height="642" alt="image" src="https://github.com/user-attachments/assets/1a7d3840-4eb3-4862-8303-03f1797f0540" />
+<img width="186" height="374" alt="image" src="https://github.com/user-attachments/assets/77818414-2126-472c-b61c-27fe15e783c5" />
+<img width="245" height="366" alt="image" src="https://github.com/user-attachments/assets/bff1a76b-6f64-466b-9558-37ed9a01c9a6" />
+<img width="226" height="359" alt="image" src="https://github.com/user-attachments/assets/a6723762-88bc-43ef-8b99-52ddbd744a3f" />
+<img width="294" height="212" alt="image" src="https://github.com/user-attachments/assets/f9f417c5-fe26-4d5b-bdce-63f612337804" />
+<img width="266" height="179" alt="image" src="https://github.com/user-attachments/assets/78543ff2-1206-482b-8c73-6daed0c6d722" />
+<img width="1280" height="862" alt="image" src="https://github.com/user-attachments/assets/7669720e-c059-4d75-8b2b-4897a5f8123e" />
+<img width="453" height="109" alt="image" src="https://github.com/user-attachments/assets/0cbb0b87-885b-4171-8fbb-b7f93d11830a" />
+<img width="335" height="247" alt="image" src="https://github.com/user-attachments/assets/432ad16c-2bcc-41fb-85a0-bebd6a2c7e8b" />
+
+
+
