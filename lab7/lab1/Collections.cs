@@ -4,6 +4,17 @@ using System.IO;
 
 public static class Collections
 {
+    private static bool CheckFileForRead(string path)
+    {
+        if (!File.Exists(path))
+        {
+            Console.WriteLine("Файл не найден: " + path);
+            return false;
+        }
+
+        return true;
+    }
+
     public static void KeepOnlyFirstOccurrences(List<int> list)
     {
         int i = 0;
@@ -51,7 +62,6 @@ public static class Collections
         }
     }
 
-    
     public static void AnalyzeWorkerLanguages(
         HashSet<string> allLanguages,
         List<HashSet<string>> workerLanguages,
@@ -96,7 +106,6 @@ public static class Collections
             knownByEveryone.Remove(lang);
         }
 
-        
         foreach (string lang in knownByAtLeastOne)
         {
             knownByNobody.Remove(lang);
@@ -107,7 +116,7 @@ public static class Collections
     {
         HashSet<char> result = new HashSet<char>();
 
-        if (!File.Exists(path))
+        if (!CheckFileForRead(path))
         {
             return result;
         }
@@ -136,13 +145,9 @@ public static class Collections
         return result;
     }
 
-    // =========================================================
-    // ЗАДАНИЕ 10
-    // Найти лучших учеников школы №50
-    // =========================================================
     public static string GetBestStudentsFromSchool50(string path)
     {
-        if (!File.Exists(path))
+        if (!CheckFileForRead(path))
         {
             return "Файл не найден";
         }
@@ -164,7 +169,13 @@ public static class Collections
 
         for (int i = 1; i <= count && i < lines.Length; i++)
         {
-            string[] parts = lines[i].Split((' '), StringSplitOptions.RemoveEmptyEntries);
+            if (lines[i].Trim().Length == 0)
+            {
+                continue;
+            }
+
+            string[] parts = lines[i].Split(
+                new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (parts.Length < 4)
             {

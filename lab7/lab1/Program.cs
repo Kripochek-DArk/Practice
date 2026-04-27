@@ -7,6 +7,9 @@ internal class Program
     static void Main(string[] args)
     {
         Console.OutputEncoding = Encoding.UTF8;
+
+        Files.GenerateSingleNumberPerLineFile("Kirill/gde/proverka", 10, 0, 100);
+        
         Console.WriteLine("ЗАДАНИЕ 1");
 
         string task1Source = "task1.txt";
@@ -21,8 +24,8 @@ internal class Program
         Console.Write("Максимум: ");
         int max1 = int.Parse(Console.ReadLine());
 
-        FileTasksPartOne.GenerateSingleNumberPerLineFile(task1Source, count1, min1, max1);
-        FileTasksPartOne.CreateFileWithDecreasedNumbers(task1Source, task1Result);
+        Files.GenerateSingleNumberPerLineFile(task1Source, count1, min1, max1);
+        Files.CreateFileWithDecreasedNumbers(task1Source, task1Result);
 
 
         Console.WriteLine("ЗАДАНИЕ 2");
@@ -41,9 +44,9 @@ internal class Program
         Console.Write("Максимум: ");
         int max2 = int.Parse(Console.ReadLine());
 
-        FileTasksPartOne.GenerateMultipleNumbersPerLineFile(task2Path, rows, perRow, min2, max2);
+        Files.GenerateMultipleNumbersPerLineFile(task2Path, rows, perRow, min2, max2);
 
-        int result2 = FileTasksPartOne.FindDifferenceBetweenFirstAndMaximum(task2Path);
+        int result2 = Files.FindDifferenceBetweenFirstAndMaximum(task2Path);
         Console.WriteLine("Результат: " + result2 + "\n");
 
 
@@ -52,10 +55,10 @@ internal class Program
         string task3Source = "task3.txt";
         string task3Result = "task3_result.txt";
 
-        Console.WriteLine("Нажми Enter когда готов файл task3 будет готов");
+        Console.WriteLine("Нажми Enter когда файл task3.txt будет готов");
         Console.ReadLine();
 
-        FileTasksPartOne.CopyLinesStartingWithLetterB(task3Source, task3Result);
+        Files.CopyLinesStartingWithLetterB(task3Source, task3Result);
 
         Console.WriteLine("Готово\n");
 
@@ -73,9 +76,9 @@ internal class Program
         Console.Write("Максимум: ");
         int max4 = int.Parse(Console.ReadLine());
 
-        FileTasksPartOne.GenerateBinaryFileWithIntegers(task4Path, count4, min4, max4);
+        Files.GenerateBinaryFileWithIntegers(task4Path, count4, min4, max4);
 
-        int result4 = FileTasksPartOne.FindDifferenceBetweenFirstAndMaximumInBinaryFile(task4Path);
+        int result4 = Files.FindDifferenceBetweenFirstAndMaximumInBinaryFile(task4Path);
 
         Console.WriteLine("Результат: " + result4 + "\n");
 
@@ -84,15 +87,15 @@ internal class Program
 
         string task5Path = "task5.xml";
 
-        FileTasksPartOne.GenerateToyXmlFile(task5Path);
+        Files.GenerateToyXmlFile(task5Path);
 
-        Console.Write("Введите тип игрушки (например: кукла): ");
+        Console.Write("Введите тип игрушки (например: Кукла): ");
         string type = Console.ReadLine();
 
         Console.Write("Введите возраст: ");
         int age = int.Parse(Console.ReadLine());
 
-        List<Toy> toys = FileTasksPartOne.GetToysByTypeAndAge(task5Path, type, age);
+        List<Toy> toys = Files.GetToysByTypeAndAge(task5Path, type, age);
 
         if (toys.Count == 0)
         {
@@ -230,13 +233,13 @@ internal class Program
         }
 
         Console.WriteLine();
-      
-      
+
+
         Console.WriteLine("ЗАДАНИЕ 9");
 
         string task9Path = "task9.txt";
 
-        Console.WriteLine("Нажми Enter когда готов файл task9 будет готов");
+        Console.WriteLine("Нажми Enter когда файл task9.txt будет готов");
         Console.ReadLine();
 
         HashSet<char> letters = Collections.GetStartingLettersOfWords(task9Path);
@@ -249,11 +252,12 @@ internal class Program
 
         Console.WriteLine("\n");
 
+
         Console.WriteLine("ЗАДАНИЕ 10");
 
         string task10Path = "task10.txt";
 
-        Console.WriteLine("Нажми Enter когда готов файл task10 будет готов");
+        Console.WriteLine("Нажми Enter когда файл task10.txt будет готов");
         Console.ReadLine();
 
         string result = Collections.GetBestStudentsFromSchool50(task10Path);
