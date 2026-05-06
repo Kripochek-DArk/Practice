@@ -15,7 +15,7 @@ public static class Collections
         return true;
     }
 
-    public static void KeepOnlyFirstOccurrences(List<int> list)
+    public static void KeepOnlyFirstOccurrences<T>(List<T> list)
     {
         int i = 0;
 
@@ -25,7 +25,7 @@ public static class Collections
 
             while (j < list.Count)
             {
-                if (list[j] == list[i])
+                if (EqualityComparer<T>.Default.Equals(list[j], list[i]))
                 {
                     list.RemoveAt(j);
                 }
@@ -39,19 +39,21 @@ public static class Collections
         }
     }
 
-    public static void SwapNeighborsAroundValue(LinkedList<int> list, int value)
+    public static void SwapNeighborsAroundValue<T>(LinkedList<T> list, T value)
     {
-        LinkedListNode<int> current = list.First;
+        LinkedListNode<T> current = list.First;
 
         while (current != null)
         {
-            if (current.Value == value)
+            if (EqualityComparer<T>.Default.Equals(current.Value, value))
             {
                 if (current.Previous != null && current.Next != null)
                 {
-                    if (current.Previous.Value != current.Next.Value)
+                    if (!EqualityComparer<T>.Default.Equals(
+                        current.Previous.Value,
+                        current.Next.Value))
                     {
-                        int temp = current.Previous.Value;
+                        T temp = current.Previous.Value;
                         current.Previous.Value = current.Next.Value;
                         current.Next.Value = temp;
                     }
@@ -63,53 +65,23 @@ public static class Collections
     }
 
     public static void AnalyzeWorkerLanguages(
-        HashSet<string> allLanguages,
-        List<HashSet<string>> workerLanguages,
-        out HashSet<string> knownByEveryone,
-        out HashSet<string> knownByAtLeastOne,
-        out HashSet<string> knownByNobody)
+    HashSet<string> allLanguages,
+    List<HashSet<string>> workerLanguages,
+    out HashSet<string> knownByEveryone,
+    out HashSet<string> knownByAtLeastOne,
+    out HashSet<string> knownByNobody)
     {
-        knownByEveryone = new HashSet<string>();
+        knownByEveryone = new HashSet<string>(allLanguages);
         knownByAtLeastOne = new HashSet<string>();
-        knownByNobody = new HashSet<string>();
-
-        foreach (string lang in allLanguages)
-        {
-            knownByEveryone.Add(lang);
-            knownByNobody.Add(lang);
-        }
+        knownByNobody = new HashSet<string>(allLanguages);
 
         for (int i = 0; i < workerLanguages.Count; i++)
         {
-            foreach (string lang in workerLanguages[i])
-            {
-                knownByAtLeastOne.Add(lang);
-            }
+            knownByEveryone.IntersectWith(workerLanguages[i]);
+            knownByAtLeastOne.UnionWith(workerLanguages[i]);
         }
 
-        HashSet<string> toRemove = new HashSet<string>();
-
-        foreach (string lang in allLanguages)
-        {
-            for (int i = 0; i < workerLanguages.Count; i++)
-            {
-                if (!workerLanguages[i].Contains(lang))
-                {
-                    toRemove.Add(lang);
-                    break;
-                }
-            }
-        }
-
-        foreach (string lang in toRemove)
-        {
-            knownByEveryone.Remove(lang);
-        }
-
-        foreach (string lang in knownByAtLeastOne)
-        {
-            knownByNobody.Remove(lang);
-        }
+        knownByNobody.ExceptWith(knownByAtLeastOne);
     }
 
     public static HashSet<char> GetStartingLettersOfWords(string path)
@@ -161,11 +133,8 @@ public static class Collections
 
         int count = int.Parse(lines[0]);
 
-        List<string> first = new List<string>();
-        List<string> second = new List<string>();
-
-        int max1 = -1;
-        int max2 = -1;
+        SortedList<int, List<string>> studentsByScore =
+            new SortedList<int, List<string>>();
 
         for (int i = 1; i <= count && i < lines.Length; i++)
         {
@@ -175,7 +144,8 @@ public static class Collections
             }
 
             string[] parts = lines[i].Split(
-                new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                new char[] { ' ' },
+                StringSplitOptions.RemoveEmptyEntries);
 
             if (parts.Length < 4)
             {
@@ -194,40 +164,21 @@ public static class Collections
 
             string fullName = surname + " " + name;
 
-            if (score > max1)
+            if (!studentsByScore.ContainsKey(score))
             {
-                max2 = max1;
-                second.Clear();
+                studentsByScore.Add(score, new List<string>());
+            }
 
-                for (int j = 0; j < first.Count; j++)
-                {
-                    second.Add(first[j]);
-                }
-
-                max1 = score;
-                first.Clear();
-                first.Add(fullName);
-            }
-            else if (score == max1)
-            {
-                first.Add(fullName);
-            }
-            else if (score > max2)
-            {
-                max2 = score;
-                second.Clear();
-                second.Add(fullName);
-            }
-            else if (score == max2)
-            {
-                second.Add(fullName);
-            }
+            studentsByScore[score].Add(fullName);
         }
 
-        if (first.Count == 0)
+        if (studentsByScore.Count == 0)
         {
             return "Нет учеников школы 50";
         }
+
+        int maxScore = studentsByScore.Keys[studentsByScore.Count - 1];
+        List<string> first = studentsByScore[maxScore];
 
         if (first.Count > 2)
         {
@@ -239,6 +190,14 @@ public static class Collections
             return first[0] + Environment.NewLine + first[1];
         }
 
+        if (studentsByScore.Count < 2)
+        {
+            return first[0];
+        }
+
+        int secondScore = studentsByScore.Keys[studentsByScore.Count - 2];
+        List<string> second = studentsByScore[secondScore];
+
         if (second.Count == 1)
         {
             return first[0] + Environment.NewLine + second[0];
@@ -247,3 +206,9 @@ public static class Collections
         return first[0];
     }
 }
+/*
+5 публичные поля
+6-7 сделанно для Int 
+8 надо операции именно над множествами 
+10 нет словаря
+*/

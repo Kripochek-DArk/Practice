@@ -333,31 +333,66 @@ public static class Files
 [Serializable]
 public class Toy
 {
-    public string Name;
-    public string Type;
-    public int Price;
-    public int MinAge;
-    public int MaxAge;
+    private string _name;
+    private string _type;
+    private int _price;
+    private int _minAge;
+    private int _maxAge;
+
+    public string Name
+    {
+        get { return _name; }
+        set { _name = value; }
+    }
+
+    public string Type
+    {
+        get { return _type; }
+        set { _type = value; }
+    }
+
+    public int Price
+    {
+        get { return _price; }
+        set { _price = value; }
+    }
+
+    public int MinAge
+    {
+        get { return _minAge; }
+        set { _minAge = value; }
+    }
+
+    public int MaxAge
+    {
+        get { return _maxAge; }
+        set { _maxAge = value; }
+    }
 
     public Toy()
     {
     }
 
-    public Toy(
-        string name, string type, int price, int minAge, int maxAge)
+    public Toy(string name, string type, int price, int minAge, int maxAge)
     {
-        Name = name;
-        Type = type;
-        Price = price;
-        MinAge = minAge;
-        MaxAge = maxAge;
+        _name = name;
+        _type = type;
+        _price = price;
+        _minAge = minAge;
+        _maxAge = maxAge;
     }
 }
 
 [Serializable]
 public class ToyCollection
 {
-    public Toy[] Items;
+    private Toy[] _items;
+
+    public Toy[] Items
+    {
+        get { return _items; }
+        set { _items = value; }
+    }
 
     public ToyCollection()
     {
