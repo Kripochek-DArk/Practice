@@ -22,6 +22,7 @@
 
 - Создан класс Test для представления записи базы данных
 
+- Создан вспомогательный статический класс TestDatabaseHelper
 - Реализована работа с бинарным файлом:
 
   - запись данных через BinaryWriter
@@ -77,4 +78,6 @@
 - Реализован вывод результатов работы программы в консоль
 
 ## Тестирование
+<img width="358" height="861" alt="image" src="https://github.com/user-attachments/assets/96dff79f-078f-49f8-90b6-db85a2136dc8" />
+<img width="850" height="316" alt="image" src="https://github.com/user-attachments/assets/fafb2a08-771e-4474-8941-fa31e3ab1740" />
 
