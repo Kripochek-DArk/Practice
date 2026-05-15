@@ -1,0 +1,101 @@
+<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Лабораторная работа"
+        Height="520"
+        Width="620"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Первое время" Grid.Row="0" Margin="0 0 0 10">
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBlock Text="Часы:" VerticalAlignment="Center"/>
+                <TextBox x:Name="FirstHoursTextBox" Width="60" Margin="10 0"/>
+
+                <TextBlock Text="Минуты:" VerticalAlignment="Center"/>
+                <TextBox x:Name="FirstMinutesTextBox" Width="60" Margin="10 0"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Второе время" Grid.Row="1" Margin="0 0 0 10">
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBlock Text="Часы:" VerticalAlignment="Center"/>
+                <TextBox x:Name="SecondHoursTextBox" Width="60" Margin="10 0"/>
+
+                <TextBlock Text="Минуты:" VerticalAlignment="Center"/>
+                <TextBox x:Name="SecondMinutesTextBox" Width="60" Margin="10 0"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Добавление минут" Grid.Row="2" Margin="0 0 0 10">
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBlock Text="Количество минут:" VerticalAlignment="Center"/>
+                <TextBox x:Name="AddMinutesTextBox" Width="100" Margin="10 0"/>
+            </StackPanel>
+        </GroupBox>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <Button Content="Вычесть Time из Time"
+                        Height="35"
+                        Margin="0 0 0 8"
+                        Click="SubtractButton_Click"/>
+
+                <Button Content="Оператор --"
+                        Height="35"
+                        Margin="0 0 0 8"
+                        Click="DecrementButton_Click"/>
+
+                <Button Content="Приведение к byte"
+                        Height="35"
+                        Margin="0 0 0 8"
+                        Click="ByteButton_Click"/>
+
+                <Button Content="Приведение к bool"
+                        Height="35"
+                        Margin="0 0 0 8"
+                        Click="BoolButton_Click"/>
+
+                <Button Content="Time + uint"
+                        Height="35"
+                        Margin="0 0 0 8"
+                        Click="TimePlusUIntButton_Click"/>
+
+                <Button Content="uint + Time"
+                        Height="35"
+                        Margin="0 0 0 8"
+                        Click="UIntPlusTimeButton_Click"/>
+
+                <Button Content="Time + Time"
+                        Height="35"
+                        Margin="0 0 0 8"
+                        Click="TimePlusTimeButton_Click"/>
+
+                <Button Content="Очистить"
+                        Height="35"
+                        Click="ClearButton_Click"/>
+            </StackPanel>
+
+            <GroupBox Header="Результат" Grid.Column="1" Margin="15 0 0 0">
+                <TextBox x:Name="ResultTextBox"
+                         Margin="10"
+                         IsReadOnly="True"
+                         TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto"
+                         AcceptsReturn="True"/>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Window>
