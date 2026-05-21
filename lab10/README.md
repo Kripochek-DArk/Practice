@@ -30,6 +30,6 @@
 - Проведено комплексное тестирование модуля на тестовом коде языка Pascal с автоматической записью, чтением и последующим удалением временного файла с диска.
 
 ### Тестирование
-<img width="630" height="641" alt="image" src="https://github.com/user-attachments/assets/f1da35a1-bbbd-4f91-a18e-d20c418d8872" />
+<img width="405" height="329" alt="image" src="https://github.com/user-attachments/assets/c9db2dd9-490c-4061-8696-4d4a5a05976a" />
 
 
