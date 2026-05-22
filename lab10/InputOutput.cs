@@ -4,62 +4,159 @@ using System.IO;
 
 struct TextPosition
 {
-    public uint _lineNumber;
-    public byte _charNumber;
+    private uint _lineNumber;
+    private byte _charNumber;
+
 
     public TextPosition(uint ln = 0, byte c = 0)
     {
         _lineNumber = ln;
         _charNumber = c;
     }
+
+    public uint LineNumber
+    {
+        get
+        {
+            return _lineNumber;
+        }
+    }
+
+    public byte CharNumber
+    {
+        get
+        {
+            return _charNumber;
+        }
+    }
+
+    public void AdvanceChar()
+    {
+        _charNumber++;
+    }
+
+    public void ResetCharAndIncrementLine()
+    {
+        _charNumber = 0;
+        _lineNumber++;
+    }
 }
 
 struct Err
 {
-    public TextPosition _errorPosition;
-    public byte _errorCode;
-    public string _errorText;
+    private TextPosition _errorPosition;
+    private byte _errorCode;
+    private string _errorText;
 
-    public Err(TextPosition _errorPosition, byte _errorCode, string _errorText)
+    public Err(TextPosition errorPosition, byte errorCode, string errorText)
     {
-        this._errorPosition = _errorPosition;
-        this._errorCode = _errorCode;
-        this._errorText = _errorText;
+        _errorPosition = errorPosition;
+        _errorCode = errorCode;
+        _errorText = errorText;
+    }
+
+    public TextPosition ErrorPosition
+    {
+        get
+        {
+            return _errorPosition;
+        }
+    }
+
+    public byte ErrorCode
+    {
+        get
+        {
+            return _errorCode;
+        }
+    }
+
+    public string ErrorText
+    {
+        get
+        {
+            return _errorText;
+        }
     }
 }
 
 class InputOutput
 {
-    private const byte _ERRMAX = 9;
-    public static char _ch { get; set; }
-    public static TextPosition _positionNow = new TextPosition(0, 0);
-    public static List<Err> _err = new List<Err>();
-    public static bool _isEndOfFile { get; private set; } = false;
+    private const byte _ERRMAX = 10;
+    private static char _ch;
+    private static TextPosition _positionNow;
+    private static List<Err> _err;
+    private static bool _isEndOfFile;
 
-    private static string _line = "";
-    private static int _lastInLine = 0;
-    private static StreamReader _fileStream { get; set; }
-    private static uint _errCount = 0;
+    private static string _line;
+    private static int _lastInLine;
+    private static StreamReader? _fileStream; 
+    private static uint _errCount;
+    private static string[] _errorTable;
 
-    public static string[] _errorTable = new string[]
+    
+    static InputOutput()
     {
-        "Ожидалось имя программы 'program'",
-        "Пропущена точка с запятой ';'",
-        "Неверный синтаксис объявления переменных 'var'",
-        "Неверная запись константы или числа",
-        "Неизвестный идентификатор",
-        "Ожидалось двоеточие ':'",
-        "Синтаксическая ошибка в теле программы",
-        "Несоответствие типов данных",
-        "Ожидался оператор 'begin'",
-        "Пропущена точка в конце программы '.'"
-    };
+        _positionNow = new TextPosition(0, 0);
+        _err = new List<Err>();
+        _isEndOfFile = false;
+
+        _line = "";
+        _lastInLine = 0;
+        _fileStream = null;
+        _errCount = 0;
+
+        _errorTable = new string[]
+        {
+            "Ожидалось имя программы 'program'",
+            "Пропущена точка с запятой ';'",
+            "Неверный синтаксис объявления переменных 'var'",
+            "Неверная запись константы или числа",
+            "Неизвестный идентификатор",
+            "Ожидалось двоеточие ':'",
+            "Синтаксическая ошибка в теле программы",
+            "Несоответствие типов данных",
+            "Ожидался оператор 'begin'",
+            "Пропущена точка в конце программы '.'"
+        };
+    }
+    public static char Ch
+    {
+        get
+        {
+            return _ch;
+        }
+    }
+
+    public static TextPosition PositionNow
+    {
+        get
+        {
+            return _positionNow;
+        }
+    }
+
+    public static bool IsEndOfFile
+    {
+        get
+        {
+            return _isEndOfFile;
+        }
+    }
+
+    public static string[] ErrorTable
+    {
+        get
+        {
+            return _errorTable;
+        }
+    }
 
     public static void Init(string filePath)
     {
         if (!File.Exists(filePath))
         {
-            Console.WriteLine($"Ошибка: Файл {filePath} не найден.");
+            Console.WriteLine($"Ошибка: Файл {filePath} не найден");
             return;
         }
 
@@ -71,7 +168,7 @@ class InputOutput
 
         if (!_fileStream.EndOfStream)
         {
-            _line = _fileStream.ReadLine();
+            _line = _fileStream.ReadLine() ?? ""; 
             _line += " ";
             _lastInLine = _line.Length - 1;
             _ch = _line[0];
@@ -91,7 +188,7 @@ class InputOutput
             return;
         }
 
-        if (_positionNow._charNumber >= _lastInLine)
+        if (_positionNow.CharNumber >= _lastInLine)
         {
             ListThisLine();
             if (_err.Count > 0)
@@ -103,19 +200,19 @@ class InputOutput
 
             if (!_isEndOfFile)
             {
-                _positionNow._lineNumber++;
-                _positionNow._charNumber = 0;
+                _positionNow.ResetCharAndIncrementLine();
                 _ch = _line[0];
             }
         }
         else
         {
-            _positionNow._charNumber++;
-            _ch = _line[_positionNow._charNumber];
+            _positionNow.AdvanceChar();
+            _ch = _line[_positionNow.CharNumber];
         }
     }
 
-    public static void Error(byte _errorCode, string _errorText, TextPosition position)
+    public static void Error(byte _errorCode,
+    string _errorText, TextPosition position)
     {
         if (_err.Count <= _ERRMAX)
         {
@@ -127,15 +224,15 @@ class InputOutput
     private static void ListThisLine()
     {
         Console.WriteLine(
-            $"{_positionNow._lineNumber.ToString().PadLeft(4)}" +
+            $"{_positionNow.LineNumber.ToString().PadLeft(4)}" +
             $" | {_line.TrimEnd()}");
     }
 
     private static void ReadNextLine()
     {
-        if (!_fileStream.EndOfStream)
+        if (_fileStream != null && !_fileStream.EndOfStream)
         {
-            _line = _fileStream.ReadLine();
+            _line = _fileStream.ReadLine() ?? ""; 
             _line += " ";
             _lastInLine = _line.Length - 1;
             _err = new List<Err>();
@@ -144,7 +241,10 @@ class InputOutput
         {
             _isEndOfFile = true;
             _ch = '\0';
-            _fileStream.Close();
+            if (_fileStream != null)
+            {
+                _fileStream.Close();
+            }
             End();
         }
     }
@@ -152,25 +252,27 @@ class InputOutput
     private static void End()
     {
         Console.WriteLine(new string('-', 40));
-        Console.WriteLine($"Компиляция завершена. " +
+        Console.WriteLine(
         $"Всего ошибок обнаружено: {_errCount}!");
         Console.WriteLine(new string('-', 40));
     }
 
     private static void ListErrors()
     {
+        string s;
+        int totalIndent;
         foreach (Err item in _err)
         {
             ++_errCount;
-            string s = "**";
+            s = "**";
             if (_errCount < 10)
             {
                 s += "0";
             }
             s += $"{_errCount}**";
 
-            int totalIndent = 7 + item._errorPosition._charNumber;
-            s = s.PadRight(totalIndent) + $"^ ошибка код {item._errorCode}: {item._errorText}";
+            totalIndent = 7 + item.ErrorPosition.CharNumber;
+            s = s.PadRight(totalIndent) + $"^ ошибка код {item.ErrorCode}: {item.ErrorText}";
             Console.WriteLine(s);
         }
     }

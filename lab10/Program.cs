@@ -5,42 +5,34 @@ class Program
 {
     static void Main()
     {
-        string testFileName = "test.pas";
+        string sourceFile = "test.pas"; 
 
-        string testCode =
-            "program Test;\n" +
-            "var a, b: integer;\n" +
-            "begin\n" +
-            "  a := 10;\n" +
-            "  b := 05;\n" +
-            "  writeln(a)\n" +
-            "end.";
+        InputOutput.Init(sourceFile);
 
-        File.WriteAllText(testFileName, testCode);
-
-        Console.WriteLine("Тестирование модуля ввода-вывода с таблицей ошибок");
-        Console.WriteLine($"Загрузка файла: {testFileName}\n");
-
-        InputOutput.Init(testFileName);
+        if (InputOutput.IsEndOfFile)
+        {
+            Console.ReadKey();
+            return;
+        }
 
         Random random = new Random();
 
-        while (!InputOutput._isEndOfFile)
+        int randomIdx;
+        byte randomErrorCode;
+        string randomErrorText;
+        while (!InputOutput.IsEndOfFile)
         {
-            if (random.Next(1, 101) <= 5)
+            if (random.Next(1, 101) <= 4)
             {
-                int randomIdx = random.Next(0, InputOutput._errorTable.Length);
-                byte randomErrorCode = (byte)(randomIdx + 1);
-                string randomErrorText = InputOutput._errorTable[randomIdx];
-                InputOutput.Error(randomErrorCode, randomErrorText, InputOutput._positionNow);
+                randomIdx = random.Next(0, InputOutput.ErrorTable.Length);
+
+                randomErrorCode = (byte)(randomIdx + 1);
+                randomErrorText = InputOutput.ErrorTable[randomIdx];
+
+                InputOutput.Error(randomErrorCode, randomErrorText, InputOutput.PositionNow);
             }
 
             InputOutput.NextCh();
-        }
-
-        if (File.Exists(testFileName))
-        {
-            File.Delete(testFileName);
         }
 
         Console.ReadKey();
