@@ -18,6 +18,8 @@ class Program
 
         File.WriteAllText(testFileName, testCode);
 
+        Console.WriteLine("Тестирование модуля ввода-вывода с таблицей ошибок");
+        Console.WriteLine($"Загрузка файла: {testFileName}\n");
 
         InputOutput.Init(testFileName);
 
@@ -27,8 +29,10 @@ class Program
         {
             if (random.Next(1, 101) <= 5)
             {
-                byte randomErrorCode = (byte)random.Next(1, 11);
-                InputOutput.Error(randomErrorCode, InputOutput._positionNow);
+                int randomIdx = random.Next(0, InputOutput._errorTable.Length);
+                byte randomErrorCode = (byte)(randomIdx + 1);
+                string randomErrorText = InputOutput._errorTable[randomIdx];
+                InputOutput.Error(randomErrorCode, randomErrorText, InputOutput._positionNow);
             }
 
             InputOutput.NextCh();

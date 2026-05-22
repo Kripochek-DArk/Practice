@@ -18,16 +18,19 @@ struct Err
 {
     public TextPosition _errorPosition;
     public byte _errorCode;
+    public string _errorText;
 
-    public Err(TextPosition _errorPosition, byte _errorCode)
+    public Err(TextPosition _errorPosition, byte _errorCode, string _errorText)
     {
         this._errorPosition = _errorPosition;
         this._errorCode = _errorCode;
+        this._errorText = _errorText;
     }
 }
 
 class InputOutput
 {
+    private const byte _ERRMAX = 9;
     public static char _ch { get; set; }
     public static TextPosition _positionNow = new TextPosition(0, 0);
     public static List<Err> _err = new List<Err>();
@@ -37,6 +40,20 @@ class InputOutput
     private static int _lastInLine = 0;
     private static StreamReader _fileStream { get; set; }
     private static uint _errCount = 0;
+
+    public static string[] _errorTable = new string[]
+    {
+        "Ожидалось имя программы 'program'",
+        "Пропущена точка с запятой ';'",
+        "Неверный синтаксис объявления переменных 'var'",
+        "Неверная запись константы или числа",
+        "Неизвестный идентификатор",
+        "Ожидалось двоеточие ':'",
+        "Синтаксическая ошибка в теле программы",
+        "Несоответствие типов данных",
+        "Ожидался оператор 'begin'",
+        "Пропущена точка в конце программы '.'"
+    };
 
     public static void Init(string filePath)
     {
@@ -98,12 +115,13 @@ class InputOutput
         }
     }
 
-    public static void Error(byte _errorCode, TextPosition position)
+    public static void Error(byte _errorCode, string _errorText, TextPosition position)
     {
-        
-        Err e = new Err(position, _errorCode);
-        _err.Add(e);
-        
+        if (_err.Count <= _ERRMAX)
+        {
+            Err e = new Err(position, _errorCode, _errorText);
+            _err.Add(e);
+        }
     }
 
     private static void ListThisLine()
@@ -134,7 +152,8 @@ class InputOutput
     private static void End()
     {
         Console.WriteLine(new string('-', 40));
-        Console.WriteLine($"Всего ошибок обнаружено: {_errCount}!");
+        Console.WriteLine($"Компиляция завершена. " +
+        $"Всего ошибок обнаружено: {_errCount}!");
         Console.WriteLine(new string('-', 40));
     }
 
@@ -151,7 +170,7 @@ class InputOutput
             s += $"{_errCount}**";
 
             int totalIndent = 7 + item._errorPosition._charNumber;
-            s = s.PadRight(totalIndent) + $"^ ошибка код {item._errorCode}";
+            s = s.PadRight(totalIndent) + $"^ ошибка код {item._errorCode}: {item._errorText}";
             Console.WriteLine(s);
         }
     }
