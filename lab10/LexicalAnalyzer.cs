@@ -17,7 +17,14 @@ class LexicalAnalyzer
             { "begin", 4 },
             { "end", 5 },
             { "integer", 6 },
-            { "real", 7 }
+            { "real", 7 },
+            { "if", 8 },
+            { "then", 9 },
+            { "else", 10 },
+            { "while", 11 },
+            { "do", 12 },
+            { "array", 13 },
+            { "of", 14 }
         };
     }
 
