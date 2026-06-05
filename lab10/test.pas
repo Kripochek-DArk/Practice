@@ -1,7 +1,6 @@
-program Test;
-            var a, b: integer;
-            begin
-              a := 10;
-              b := 05;
-              writeln(a)
-            end.;
+program a;
+var var
+d = 999;
+begin
+  d = 10;
+end.

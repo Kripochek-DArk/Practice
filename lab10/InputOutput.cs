@@ -1,84 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-
-struct TextPosition
-{
-    private uint _lineNumber;
-    private byte _charNumber;
-
-
-    public TextPosition(uint ln = 0, byte c = 0)
-    {
-        _lineNumber = ln;
-        _charNumber = c;
-    }
-
-    public uint LineNumber
-    {
-        get
-        {
-            return _lineNumber;
-        }
-    }
-
-    public byte CharNumber
-    {
-        get
-        {
-            return _charNumber;
-        }
-    }
-
-    public void AdvanceChar()
-    {
-        _charNumber++;
-    }
-
-    public void ResetCharAndIncrementLine()
-    {
-        _charNumber = 0;
-        _lineNumber++;
-    }
-}
-
-struct Err
-{
-    private TextPosition _errorPosition;
-    private byte _errorCode;
-    private string _errorText;
-
-    public Err(TextPosition errorPosition, byte errorCode, string errorText)
-    {
-        _errorPosition = errorPosition;
-        _errorCode = errorCode;
-        _errorText = errorText;
-    }
-
-    public TextPosition ErrorPosition
-    {
-        get
-        {
-            return _errorPosition;
-        }
-    }
-
-    public byte ErrorCode
-    {
-        get
-        {
-            return _errorCode;
-        }
-    }
-
-    public string ErrorText
-    {
-        get
-        {
-            return _errorText;
-        }
-    }
-}
+using System.Text;
 
 class InputOutput
 {
@@ -90,11 +13,11 @@ class InputOutput
 
     private static string _line;
     private static int _lastInLine;
-    private static StreamReader? _fileStream; 
+    private static StreamReader? _fileStream;
+    private static StreamWriter? _outputStream;
     private static uint _errCount;
     private static string[] _errorTable;
 
-    
     static InputOutput()
     {
         _positionNow = new TextPosition(0, 0);
@@ -104,6 +27,7 @@ class InputOutput
         _line = "";
         _lastInLine = 0;
         _fileStream = null;
+        _outputStream = null;
         _errCount = 0;
 
         _errorTable = new string[]
@@ -111,7 +35,7 @@ class InputOutput
             "Ожидалось имя программы 'program'",
             "Пропущена точка с запятой ';'",
             "Неверный синтаксис объявления переменных 'var'",
-            "Неверная запись константы или числа",
+            "Число выходит за пределы допустимого диапазона (Int32)",
             "Неизвестный идентификатор",
             "Ожидалось двоеточие ':'",
             "Синтаксическая ошибка в теле программы",
@@ -120,39 +44,28 @@ class InputOutput
             "Пропущена точка в конце программы '.'"
         };
     }
+
     public static char Ch
     {
-        get
-        {
-            return _ch;
-        }
+        get { return _ch; }
     }
 
     public static TextPosition PositionNow
     {
-        get
-        {
-            return _positionNow;
-        }
+        get { return _positionNow; }
     }
 
     public static bool IsEndOfFile
     {
-        get
-        {
-            return _isEndOfFile;
-        }
+        get { return _isEndOfFile; }
     }
 
     public static string[] ErrorTable
     {
-        get
-        {
-            return _errorTable;
-        }
+        get { return _errorTable; }
     }
 
-    public static void Init(string filePath)
+    public static void Init(string filePath, string outputPath)
     {
         if (!File.Exists(filePath))
         {
@@ -161,6 +74,7 @@ class InputOutput
         }
 
         _fileStream = new StreamReader(filePath);
+        _outputStream = new StreamWriter(outputPath, false, Encoding.UTF8);
         _errCount = 0;
         _isEndOfFile = false;
         _positionNow = new TextPosition(1, 0);
@@ -168,7 +82,7 @@ class InputOutput
 
         if (!_fileStream.EndOfStream)
         {
-            _line = _fileStream.ReadLine() ?? ""; 
+            _line = _fileStream.ReadLine() ?? "";
             _line += " ";
             _lastInLine = _line.Length - 1;
             _ch = _line[0];
@@ -211,12 +125,20 @@ class InputOutput
         }
     }
 
-    public static void Error(byte _errorCode,
-    string _errorText, TextPosition position)
+    public static void WriteCode(int code)
+    {
+        if (_outputStream != null)
+        {
+            _outputStream.Write($"{code} ");
+        }
+    }
+
+    public static void Error(byte errorCode, string errorText, 
+        TextPosition position)
     {
         if (_err.Count <= _ERRMAX)
         {
-            Err e = new Err(position, _errorCode, _errorText);
+            Err e = new Err(position, errorCode, errorText);
             _err.Add(e);
         }
     }
@@ -232,7 +154,7 @@ class InputOutput
     {
         if (_fileStream != null && !_fileStream.EndOfStream)
         {
-            _line = _fileStream.ReadLine() ?? ""; 
+            _line = _fileStream.ReadLine() ?? "";
             _line += " ";
             _lastInLine = _line.Length - 1;
             _err = new List<Err>();
@@ -241,9 +163,14 @@ class InputOutput
         {
             _isEndOfFile = true;
             _ch = '\0';
+            
             if (_fileStream != null)
             {
                 _fileStream.Close();
+            }
+            if (_outputStream != null)
+            {
+                _outputStream.Close();
             }
             End();
         }
@@ -252,8 +179,7 @@ class InputOutput
     private static void End()
     {
         Console.WriteLine(new string('-', 40));
-        Console.WriteLine(
-        $"Всего ошибок обнаружено: {_errCount}!");
+        Console.WriteLine($"Всего ошибок обнаружено: {_errCount}!");
         Console.WriteLine(new string('-', 40));
     }
 
@@ -272,7 +198,8 @@ class InputOutput
             s += $"{_errCount}**";
 
             totalIndent = 7 + item.ErrorPosition.CharNumber;
-            s = s.PadRight(totalIndent) + $"^ ошибка код {item.ErrorCode}: {item.ErrorText}";
+            s = s.PadRight(totalIndent) + 
+                $"^ ошибка код {item.ErrorCode}: {item.ErrorText}";
             Console.WriteLine(s);
         }
     }
