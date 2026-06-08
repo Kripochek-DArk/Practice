@@ -1,6 +1,6 @@
 program a;
-var var
-d = 999;
+var
+d : integer;
 begin
   d = 10;
 end.

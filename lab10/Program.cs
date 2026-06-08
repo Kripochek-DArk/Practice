@@ -15,7 +15,7 @@ class Program
             return;
         }
 
-        LexicalAnalyzer.Analyze();
+        SyntaxAnalyzer.Parse();
 
         Console.ReadKey();
     }
